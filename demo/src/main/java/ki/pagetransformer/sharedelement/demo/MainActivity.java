@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public final SmallPictureFragment small_picture_fragment = new SmallPictureFragment();
     public final BigPictureFragment big_picture_fragment = new BigPictureFragment();
-    public final HelloFragment third_fragment = new HelloFragment();
+    public final HelloFragment hello_fragment = new HelloFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager() {
         TestViewPager adapter = new TestViewPager(getSupportFragmentManager());
 
-        adapter.addFragment(PAGE_HELLO, third_fragment);
+        adapter.addFragment(PAGE_HELLO, hello_fragment);
         adapter.addFragment(PAGE_SMALL_CAT, small_picture_fragment);
         adapter.addFragment(PAGE_BIG_CAT, big_picture_fragment);
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(third_fragment);
+        fragments.add(hello_fragment);
         fragments.add(small_picture_fragment);
         fragments.add(big_picture_fragment);
 

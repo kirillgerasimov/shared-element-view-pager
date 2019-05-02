@@ -1,1 +1,1 @@
-include ':sample', ':shared-element-view-pager'
+include ':demo', ':shared-element-view-pager'
