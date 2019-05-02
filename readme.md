@@ -4,30 +4,64 @@ This library allows you to perform somewhat similar to Shared Element Transition
 
 ![](images/shared-element-demo.gif)
 
-### Contents.
+## Contents
 - **demo** - directory with demo android app that. Shows Shared Element Transition between ViewPager pages.
 share
 - **shared-element-view-pager** - the library itself
 
-### Usage.
+## Usage
+### Adding library
+1. Add remote maven repository to fetch an artifact
+```        
+allprojects {
+    repositories {
+        //...
+        maven {
+            url  "https://dl.bintray.com/kirillgerasimov/maven"
+        }
+    }
+}
+```
+<br/>
+<br/>
 
-- Add all fragment from from your ViewPager to the List in the same order.
+
+2. Add library to module dependencies
+```   
+dependencies {
+    //...     
+    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.1-alpha'
+}
+```
+<br/>
+<br/>
+<br/>
+
+
+
+### Creating shared element transitions
+
+1. Add all fragment from from your ViewPager to the List in the same order.
 ```
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(hello_fragment);
         fragments.add(small_picture_fragment);
 ```
 <br/>
+<br/>
 
-- Create *SharedElementPageTransformer* presumably in *Activity.onCreate()*. <br/>
+
+2. Create *SharedElementPageTransformer* presumably in *Activity.onCreate()*. <br/>
 *this* refers to activity:
 ```
         SharedElementPageTransformer transformer =
                 new SharedElementPageTransformer(this,  fragments);
 ```
 <br/>
+<br/>
 
-- Add shared transition by passing pairs of view ids, that need to be linked together 
+
+3. Add shared transition by passing pairs of view ids, that need to be linked together 
 
 ```
         transformer.addSharedTransition(R.id.smallPic_image_cat, R.id.bigPic_image_cat);
@@ -40,11 +74,23 @@ share
         transformer.addSharedTransition(R.id.smallPic_text_label, R.id.third_text);
 ```
 <br/>
+<br/>
 
-- Set our *transformer* to ViewPager pageTransformer **AND** onPageChangeListener.
+
+4. Set our *transformer* to ViewPager's pageTransformer **AND** onPageChangeListener.
 ```
         viewPager.setPageTransformer(false, transformer);
         viewPager.addOnPageChangeListener(transformer);
 ```
+<br/>
+<br/>
 
-Look at *ki.pagetransformer.sharedelement.demo.MainActivity* and compile the demo for more details. 
+
+
+Look at *ki.pagetransformer.sharedelement.demo.MainActivity* and compile the demo for more details.
+<br/>
+<br/>
+
+
+### Restrictions
+Note that  *SharedElementPageTransformer* requires page width to be equal to screen to work properly. 
