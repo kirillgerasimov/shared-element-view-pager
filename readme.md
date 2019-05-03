@@ -6,19 +6,17 @@ This library allows you to perform somewhat similar to Shared Element Transition
 
 ## Contents
 - **demo** - directory with demo android app that. Shows Shared Element Transition between ViewPager pages.
-share
+
 - **shared-element-view-pager** - the library itself
 
 ## Usage
 ### Adding library
-1. Add remote maven repository to fetch an artifact
+1. Make sure you have jcenter() in you repositories
 ```        
 allprojects {
     repositories {
-        //...
-        maven {
-            url  "https://dl.bintray.com/kirillgerasimov/maven"
-        }
+        google()
+        jcenter() //All android studio projects have this repo by default
     }
 }
 ```
@@ -41,7 +39,7 @@ dependencies {
 
 ### Creating shared element transitions
 
-1. Add all fragment from from your ViewPager to the List in the same order.
+1. Add all fragments from your ViewPager to the List in the same order.
 ```
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(hello_fragment);
