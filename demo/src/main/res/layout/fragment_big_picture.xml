@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="0dp"
+    android:padding="0dp"
     >
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
-        android:text="Page 3"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--android:background="#Ffc"-->
 
     <ImageView
         android:id="@+id/bigPic_image_cat"
-        android:layout_width="281dp"
-        android:layout_height="420dp"
+        android:layout_width="match_parent"
+        android:layout_height="377dp"
         android:layout_margin="0dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/cat_office"
+        android:scaleType="fitXY"
+        android:src="@drawable/cat1"
         android:transitionName="shared_cat"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/bigPic_text_page"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="60dp"-->
+        <!--android:text="Page 2"-->
+        <!--android:textSize="36sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
     <TextView
         android:id="@+id/bigPic_text_label"
@@ -43,12 +42,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="Middle age cat"
-        android:textSize="30sp"
+        android:text="Norwegian Forest cat"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/smallPic_image_cat2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bigPic_image_cat" />
+
+    <TextView
+        android:id="@+id/bigPic_text_desc"
+        android:layout_width="360dp"
+        android:layout_height="247dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:text="The Norwegian Forest cat (Norwegian: Norsk skogkatt or Norsk skaukatt) is a breed of domestic cat originating in Northern Europe.[1] This natural breed is adapted to a very cold climate, with a top coat of glossy, long, water-shedding hairs and a woolly undercoat for insulation. Although this is uncertain, the breed's ancestors may have been a landrace of short-haired cats brought to Norway by the Vikings around 1000 AD, who may also have brought with them long-haired cats, like those ancestral to the modern Siberian and Turkish Angora breeds."
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bigPic_text_label" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

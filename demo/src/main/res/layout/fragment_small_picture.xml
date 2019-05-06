@@ -1,57 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="0dp"
-    >
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/smallPic_image_cat"
-        android:layout_width="167dp"
-        android:layout_height="251dp"
-        android:layout_margin="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/smallPic_image_cat1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/cat_office"
-        android:transitionName="shared_cat"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/cat6"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/smallPic_text_label"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/smallPic_image_cat2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-thin"
-        android:text="Kitten"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/smallPic_image_cat"
-        app:layout_constraintStart_toStartOf="@+id/smallPic_image_cat"
-        app:layout_constraintTop_toBottomOf="@+id/smallPic_image_cat" />
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/cat1"
+        android:transitionName="shared_cat"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smallPic_image_cat1" />
+
+    <ImageView
+        android:id="@+id/smallPic_image_cat3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/cat3"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smallPic_image_cat2" />
+
+    <ImageView
+        android:id="@+id/smallPic_image_cat4"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/cat4"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smallPic_image_cat3" />
+
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/smallPic_text_label5"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
-        android:text="Page 2"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="28dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="My owner is stupid"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/smallPic_image_cat4"
+        app:layout_constraintStart_toEndOf="@+id/smallPic_image_cat1"
+        app:layout_constraintTop_toTopOf="@+id/smallPic_image_cat4" />
+
+    <TextView
+        android:id="@+id/smallPic_text_label4"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Bread cat"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/smallPic_image_cat3"
+        app:layout_constraintStart_toEndOf="@+id/smallPic_image_cat1"
+        app:layout_constraintTop_toTopOf="@+id/smallPic_image_cat3"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <TextView
+        android:id="@+id/smallPic_text_label3"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Norwegian Forest cat"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/smallPic_image_cat2"
+        app:layout_constraintStart_toEndOf="@+id/smallPic_image_cat1"
+        app:layout_constraintTop_toTopOf="@+id/smallPic_image_cat2" />
+
+    <TextView
+        android:id="@+id/smallPic_text_label2"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Bengal cat"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/smallPic_image_cat1"
+        app:layout_constraintStart_toEndOf="@+id/smallPic_image_cat1"
+        app:layout_constraintTop_toTopOf="@+id/smallPic_image_cat1"
+        app:layout_constraintVertical_bias="0.534" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

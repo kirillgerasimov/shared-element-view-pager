@@ -32,7 +32,8 @@ import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_IDLE;
  */
 public class SharedElementPageTransformer implements ViewPager.PageTransformer, ViewPager.OnPageChangeListener {
     /** Android need the correction while view scaling for some reason*/
-    private static float MAGICAL_ANDROID_RENDERING_SCALE = 0.995f;
+    private static float MAGICAL_ANDROID_RENDERING_SCALE = 1;
+//    private static float MAGICAL_ANDROID_RENDERING_SCALE = 0.995f;
 
     // External variables
 

@@ -40,8 +40,8 @@ public class SmallPictureFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        smallCatImageView = view.findViewById(R.id.smallPic_image_cat);
-        smallCatLabel = view.findViewById(R.id.smallPic_text_label);
+        smallCatImageView = view.findViewById(R.id.smallPic_image_cat2);
+        smallCatLabel = view.findViewById(R.id.smallPic_text_label2);
 
         MainActivity activity = (MainActivity) getActivity();
 
