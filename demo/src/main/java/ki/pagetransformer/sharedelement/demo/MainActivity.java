@@ -81,14 +81,9 @@ public class MainActivity extends AppCompatActivity {
         SharedElementPageTransformer transformer =
                 new SharedElementPageTransformer(this,  fragments);
 
-        transformer.addSharedTransition(R.id.smallPic_image_cat2, R.id.bigPic_image_cat);
-        transformer.addSharedTransition(R.id.bigPic_image_cat, R.id.smallPic_image_cat2);
-
-        transformer.addSharedTransition(R.id.smallPic_text_label3, R.id.bigPic_text_label);
-        transformer.addSharedTransition(R.id.bigPic_text_label, R.id.smallPic_text_label3);
-
-        transformer.addSharedTransition(R.id.hello_text, R.id.smallPic_text_label3);
-        transformer.addSharedTransition(R.id.smallPic_text_label3, R.id.hello_text);
+        transformer.addSharedTransition(R.id.smallPic_image_cat2, R.id.bigPic_image_cat, true);
+        transformer.addSharedTransition(R.id.smallPic_text_label3, R.id.bigPic_text_label, true);
+        transformer.addSharedTransition(R.id.hello_text, R.id.smallPic_text_label3, true);
 
         viewPager.setPageTransformer(false, transformer);
         viewPager.addOnPageChangeListener(transformer);

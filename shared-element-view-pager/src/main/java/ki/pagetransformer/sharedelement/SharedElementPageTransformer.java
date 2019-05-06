@@ -82,7 +82,7 @@ public class SharedElementPageTransformer implements ViewPager.PageTransformer, 
                 View fromPage = pages.get(fromPageNumber);
                 View toPage = pages.get(toPageNumber);
 
-                if(fromPage != null && toPage != null) {
+                if (fromPage != null && toPage != null) {
                     fromView = fromPage.findViewById(fromViewId);
                     toView = toPage.findViewById(toViewId);
 
@@ -138,8 +138,8 @@ public class SharedElementPageTransformer implements ViewPager.PageTransformer, 
 
                                 toView.setTranslationX(translationX);
                                 toView.setTranslationY(translationY);
-                                float scaleX = (toWidth == 0) ? 1 : (toWidth + deltaWidth * sign * -position) / toWidth;
-                                float scaleY = (toHeight == 0) ? 1 :(toHeight + deltaHeight * sign * -position) / toHeight;
+                                float scaleX = (toWidth == 0) ? 1 : (toWidth + deltaWidth * sign * (-position)) / toWidth;
+                                float scaleY = (toHeight == 0) ? 1 :(toHeight + deltaHeight * sign * (-position)) / toHeight;
 
                                 toView.setScaleX(scaleX);
                                 toView.setScaleY(scaleY);
@@ -238,9 +238,27 @@ public class SharedElementPageTransformer implements ViewPager.PageTransformer, 
      * @param toViewId
      */
     public void addSharedTransition(int fromViewId, int toViewId) {
-        sharedElementIds.add(new Pair<>(fromViewId, toViewId));
+        addSharedTransition(fromViewId, toViewId, false);
     }
 
+    /**
+     * Set up shared element transition from element with <code>fromViewId</code> to
+     * element with <code>toViewId</code>. Note that you can setup each transition
+     * direction separately. e.g. <br/>
+     * <code>addSharedTransition(R.id.FirstPageTextView, R.id.SecondPageTextView)</code><br/>
+     * and<br/>
+     * <code>addSharedTransition(R.id.SecondPageTextView, R.id.FirstPageTextView)</code><br/>
+     * are different.
+     * @param fromViewId
+     * @param toViewId
+     * @param bothDirections to include backward transition from toViewId to fromViewId aswell
+     */
+    public void addSharedTransition(int fromViewId, int toViewId, boolean bothDirections) {
+        sharedElementIds.add(new Pair<>(fromViewId, toViewId));
+        if(bothDirections) {
+            sharedElementIds.add(new Pair<>(toViewId, fromViewId));
+        }
+    }
     /**
      * In case there is "ladder" appears between while transition.
      * You may try to tune that magical scale to get rid of it.

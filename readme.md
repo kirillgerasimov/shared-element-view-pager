@@ -28,7 +28,7 @@ allprojects {
 ```   
 dependencies {
     //...     
-    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.1-alpha'
+    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.2-alpha'
 }
 ```
 <br/>
@@ -62,14 +62,8 @@ dependencies {
 3. Add shared transition by passing pairs of view ids, that need to be linked together 
 
 ```
-        transformer.addSharedTransition(R.id.smallPic_image_cat, R.id.bigPic_image_cat);
-        transformer.addSharedTransition(R.id.bigPic_image_cat, R.id.smallPic_image_cat);
+        transformer.addSharedTransition(R.id.hello_text, R.id.smallPic_text_label3, true);
 
-        transformer.addSharedTransition(R.id.smallPic_text_label, R.id.bigPic_text_label);
-        transformer.addSharedTransition(R.id.bigPic_text_label, R.id.smallPic_text_label);
-
-        transformer.addSharedTransition(R.id.third_text, R.id.smallPic_text_label);
-        transformer.addSharedTransition(R.id.smallPic_text_label, R.id.third_text);
 ```
 <br/>
 <br/>
