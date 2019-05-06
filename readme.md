@@ -1,8 +1,12 @@
 # Shared Element View Pager
 This library allows you to perform Shared Element Transition **between** ViewPager pages.
 It's an alpha version so feel free to create pull requests or modify it by your own.
+<p align="center">
 
-![](images/shared-element-demo.gif)
+
+<img src="images/shared-element-demo.gif"/>
+</p>
+
 
 ## Contents
 - **demo** - directory with demo android app that shows Shared Element Transition between ViewPager pages.
