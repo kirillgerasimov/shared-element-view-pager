@@ -32,7 +32,7 @@ allprojects {
 ```   
 dependencies {
     //...     
-    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.2-alpha'
+    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.3-alpha'
 }
 ```
 <br/>
@@ -56,8 +56,7 @@ dependencies {
 2. Create *SharedElementPageTransformer* presumably in *Activity.onCreate()*. <br/>
 *this* refers to activity:
 ```
-        SharedElementPageTransformer transformer =
-                new SharedElementPageTransformer(this,  fragments);
+     SePageTransformer transformer = new DefaultSePageTransformer(this,  fragments, viewPager);
 ```
 <br/>
 <br/>
@@ -66,7 +65,8 @@ dependencies {
 3. Add shared transition by passing pairs of view ids, that need to be linked together 
 
 ```
-        transformer.addSharedTransition(R.id.hello_text, R.id.smallPic_text_label3, true);
+    transformer.addTransition(R.id.smallPic_image_cat2, R.id.bigPic_image_cat);
+
 
 ```
 <br/>
@@ -75,8 +75,8 @@ dependencies {
 
 4. Set our *transformer* to ViewPager's pageTransformer **AND** onPageChangeListener.
 ```
-        viewPager.setPageTransformer(false, transformer);
-        viewPager.addOnPageChangeListener(transformer);
+    viewPager.setPageTransformer(false, transformer);
+    viewPager.addOnPageChangeListener(transformer);
 ```
 <br/>
 <br/>
@@ -89,4 +89,41 @@ Look at *ki.pagetransformer.sharedelement.demo.MainActivity* and compile the dem
 
 
 ### Restrictions
-Note that  *SharedElementPageTransformer* requires page width to be equal to screen to work properly. 
+Note that  *DefaultSePageTransformer* requires page width to be equal to screen to work properly.  This transformer does not 
+create any intermediate extra views to perform animation. That's why it only drown within parent View (that's how drawing works in android). 
+Fast animation may look fine in that case too though.
+
+To work with nested views you need to: 
+ 1. create intermediate view in root layout
+ 2. Place it on top of animated view
+ 3. addTransition(R.id.intermediateViewId, R.id.targetViewId)
+ 4. manage view visibility
+
+Also I created experimental AuxiliarySePageTransformer, that do the following steps for you. 
+If you animate Recycler View, you still need to provide unique Ids. You could use the following 
+example:
+
+```
+  @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        ImageView imageView = getImageView(holder);
+        imageView.setId(generateThumbnailId(position));         
+    
+    }            
+    
+    //...       
+    private ImageView getImageView(ViewHolder holder) {
+        return (ImageView) holder.frameLayout.getChildAt(0);
+    }
+    public int generateThumbnailId(int itemPosition) {
+        return 1000000 + itemPosition;
+    }
+    //...
+     v.setOnClickListener(view -> {
+        transformer.addTransition(generateThumbnailId(itemPosition), R.id.targetViewId);
+        activity.viewPager.setCurrentItem(2);
+    }
+```
+
+AuxiliarySePageTransformer doesn't require View Pager to occupy whole screen. 
+It works only with Image Views and relative root layout at the moment.  

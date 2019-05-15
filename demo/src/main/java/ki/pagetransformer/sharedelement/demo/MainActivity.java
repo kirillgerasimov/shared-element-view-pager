@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 
-import ki.pagetransformer.sharedelement.SharedElementPageTransformer;
+import ki.pagetransformer.sharedelement.AuxiliarySePageTransformer;
+import ki.pagetransformer.sharedelement.DefaultSePageTransformer;
+import ki.pagetransformer.sharedelement.SePageTransformer;
 import ki.pagetransformer.sharedelement.demo.fragment.BigPictureFragment;
 import ki.pagetransformer.sharedelement.demo.fragment.SmallPictureFragment;
 import ki.pagetransformer.sharedelement.demo.fragment.HelloFragment;
@@ -78,12 +80,13 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(big_picture_fragment);
 
 
-        SharedElementPageTransformer transformer =
-                new SharedElementPageTransformer(this,  fragments);
+        SePageTransformer transformer = new DefaultSePageTransformer(this,  fragments, viewPager);
+        // Uncomment this to try experimental page transformer
+//        SePageTransformer transformer = new AuxiliarySePageTransformer(this,  fragments, viewPager, findViewById(R.id.main_root));
 
-        transformer.addSharedTransition(R.id.smallPic_image_cat2, R.id.bigPic_image_cat, true);
-        transformer.addSharedTransition(R.id.smallPic_text_label3, R.id.bigPic_text_label, true);
-        transformer.addSharedTransition(R.id.hello_text, R.id.smallPic_text_label3, true);
+        transformer.addTransition(R.id.smallPic_image_cat2, R.id.bigPic_image_cat);
+        transformer.addTransition(R.id.smallPic_text_label3, R.id.bigPic_text_label);
+        transformer.addTransition(R.id.hello_text, R.id.smallPic_text_label3);
 
         viewPager.setPageTransformer(false, transformer);
         viewPager.addOnPageChangeListener(transformer);
