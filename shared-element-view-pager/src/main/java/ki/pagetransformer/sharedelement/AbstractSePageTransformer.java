@@ -78,8 +78,8 @@ public abstract class AbstractSePageTransformer implements SePageTransformer {
 
                     // if both views are on pages user drag between apply transformation
                     if (
-                            fromView != null
-                                    && toView != null
+                        fromView != null
+                        && toView != null
                     ) {
 
                         boolean slideToTheRight = toPageNumber > fromPageNumber;
@@ -117,13 +117,15 @@ public abstract class AbstractSePageTransformer implements SePageTransformer {
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        Set<Integer> visiblePages = new HashSet<>();
+        fromPageNumber = position;
+        toPageNumber = positionOffset >= 0 ? position + 1 : position - 1;
 
-        visiblePages.add(position);
-        visiblePages.add(positionOffset >= 0 ? position + 1 : position - 1);
-        visiblePages.remove(fromPageNumber);
-
-        toPageNumber = visiblePages.iterator().next();
+//        Set<Integer> visiblePages = new HashSet<>();
+//        visiblePages.add(position);
+//        visiblePages.add(positionOffset >= 0 ? position + 1 : position - 1);
+//        visiblePages.remove(fromPageNumber);
+//
+//        toPageNumber = visiblePages.iterator().next();
 
         if (pages == null || toPageNumber >= pages.size()) toPageNumber = null;
     }

@@ -89,8 +89,8 @@ public class SharedElementPageTransformer implements ViewPager.PageTransformer, 
 
                     // if both views are on pages user drag between apply transformation
                     if (
-                            fromView != null
-                                    && toView != null
+                        fromView != null
+                        && toView != null
                     ) {
                         // saving shared element position on the screen
                         float fromX = fromView.getX() - fromView.getTranslationX();

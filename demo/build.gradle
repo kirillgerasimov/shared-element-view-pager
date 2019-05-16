@@ -34,6 +34,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha04'
 
     //getting library from remote repository instead of a local module
-//    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.2-alpha'
-    implementation project(path: ':shared-element-view-pager')
+    implementation 'com.github.kirillgerasimov:shared-element-view-pager:0.0.4-alpha'
+//    implementation project(path: ':shared-element-view-pager')
 }

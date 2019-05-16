@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -24,7 +23,9 @@ import java.util.Map;
  * </code>
  */
 public class AuxiliarySePageTransformer extends AbstractSePageTransformer {
-    private Map<Pair<Integer, Integer>, ImageView> intermediateViews = new HashMap<>();
+
+    private Map<Pair<Integer, Integer>, View> intermediateViews = new HashMap<>();
+    
     private final Object relativeLayout;
 
     /**
@@ -47,7 +48,10 @@ public class AuxiliarySePageTransformer extends AbstractSePageTransformer {
 
         if (fromView instanceof ImageView && toView instanceof ImageView) {
             if (!intermediateViews.containsKey(idPair)) {
-
+//                for debug purposes
+//                TextView imageView = new TextView(activity);
+//                imageView.setText(idPair.first + " - " + idPair.second);
+//                imageView.setTextSize(40);
                 ImageView imageView = new ImageView(activity);
 //                imageView.setBackgroundColor(0xFF000000);
                 imageView.setImageDrawable(((ImageView) fromView).getDrawable());
@@ -71,107 +75,152 @@ public class AuxiliarySePageTransformer extends AbstractSePageTransformer {
 
                 ((RelativeLayout) relativeLayout).addView(imageView, params);
             }
-        }
 
 
-        // saving shared element position on the screen
+            // saving shared element position on the screen
 
-        float fromX = idToAbsX.get(fromViewId) != null ? idToAbsX.get(fromViewId) : fromView.getX() - fromView.getTranslationX();
-        float fromY = idToAbsY.get(fromViewId) != null ? idToAbsY.get(fromViewId) : fromView.getY() - fromView.getTranslationY();
+            float fromX = idToAbsX.get(fromViewId) != null ? idToAbsX.get(fromViewId) : fromView.getX() - fromView.getTranslationX();
+            float fromY = idToAbsY.get(fromViewId) != null ? idToAbsY.get(fromViewId) : fromView.getY() - fromView.getTranslationY();
 
-        float toX = idToAbsX.get(toViewId) != null ? idToAbsX.get(toViewId) : toView.getX() - toView.getTranslationX();
-        float toY = idToAbsY.get(toViewId) != null ? idToAbsY.get(toViewId) : toView.getY() - toView.getTranslationY();
-        float deltaX = toX - fromX;
-        float deltaY = toY - fromY;
+            float toX = idToAbsX.get(toViewId) != null ? idToAbsX.get(toViewId) : toView.getX() - toView.getTranslationX();
+            float toY = idToAbsY.get(toViewId) != null ? idToAbsY.get(toViewId) : toView.getY() - toView.getTranslationY();
+            float deltaX = toX - fromX;
+            float deltaY = toY - fromY;
 
-        // scaling
-        float fromWidth = fromView.getWidth();
-        float fromHeight = fromView.getHeight();
-        float toWidth = toView.getWidth();
-        float toHeight = toView.getHeight();
-        float deltaWidth = toWidth - fromWidth;
-        float deltaHeight = toHeight - fromHeight;
-
-
-        int fromId = fromView.getId();
-        int toId = toView.getId();
-
-        if (position <= -1) {
-            ImageView intermediateView = intermediateViews.get(idPair);
-            if (intermediateView != null && currentPage.findViewById(fromId) != null) {
-                intermediateView.setVisibility(View.INVISIBLE);
-
-            }
-
-        } else if (position < 1) {
+            // scaling
+            float fromWidth = fromView.getWidth();
+            float fromHeight = fromView.getHeight();
+            float toWidth = toView.getWidth();
+            float toHeight = toView.getHeight();
+            float deltaWidth = toWidth - fromWidth;
+            float deltaHeight = toHeight - fromHeight;
 
 
-            float sign = slideToTheRight ? 1 : -1;
+            int fromId = fromView.getId();
+            int toId = toView.getId();
 
-            ImageView intermediateView = intermediateViews.get(idPair);
-            if (intermediateView != null && currentPage.findViewById(fromId) != null) {
+            if (position <= -1) {
+                View intermediateView = intermediateViews.get(idPair);
+                if (intermediateView != null && currentPage.findViewById(fromId) != null) {
+                    intermediateView.setVisibility(View.INVISIBLE);
 
-                float translationXx = (deltaX + deltaWidth / 2) * sign * (-(position));
-                float translationYy = (deltaY + deltaHeight / 2) * sign * (-(position));
+                }
 
-                Float fromViewX = idToAbsX.get(fromId);
-                Float fromViewY = idToAbsY.get(fromId);
+            } else if (position < 1) {
 
-                if (intermediateView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams && fromViewX != null) {
-                    ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) intermediateView.getLayoutParams();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                        //TranslationX and Y is not working properly so I have to use margin
-                        int[] layoutPosition = getLayoutPosition();
-                        int marginX = (int) (translationXx + fromViewX - layoutPosition[0]);
-                        int marginY = (int) (translationYy + fromViewY - layoutPosition[1]);
-                        p.setMarginStart(marginX);
-                        p.topMargin = marginY;
 
-                    }
+                float sign = slideToTheRight ? 1 : -1;
+
+                View intermediateView = intermediateViews.get(idPair);
+                if (intermediateView != null && currentPage.findViewById(fromId) != null) {
+
+                    float translationXx = (deltaX + deltaWidth / 2) * sign * (-(position));
+                    float translationYy = (deltaY + deltaHeight / 2) * sign * (-(position));
+
+                    Float fromViewX = idToAbsX.get(fromId);
+                    Float fromViewY = idToAbsY.get(fromId);
+
+                    if (intermediateView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams && fromViewX != null) {
+                        ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) intermediateView.getLayoutParams();
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                            //TranslationX and Y is not working properly so I have to use margin
+                            int[] layoutPosition = getLayoutPosition();
+                            int marginX = (int) (translationXx + fromViewX - layoutPosition[0]);
+                            int marginY = (int) (translationYy + fromViewY - layoutPosition[1]);
+                            p.setMarginStart(marginX);
+                            p.topMargin = marginY;
+
+                        }
 //                    intermediateView.setTranslationX(translationXx);
 //                    intermediateView.setTranslationY(translationYy);
-                    intermediateView.requestLayout();
+                        intermediateView.requestLayout();
+                    }
+
+                    float scaleX = (fromWidth == 0) ? 1 : (fromWidth + deltaWidth * sign * (-position)) / fromWidth;
+                    float scaleY = (fromHeight == 0) ? 1 : (fromHeight + deltaHeight * sign * (-position)) / fromHeight;
+
+                    intermediateView.setScaleX(scaleX);
+                    intermediateView.setScaleY(scaleY);
+//                intermediateView.setVisibility(View.VISIBLE);
+//                ImageView imageView = intermediateViews.get(Pair.create(idPair.second, idPair.first));
+//                if (imageView != null) {
+//                    imageView.setVisibility(View.INVISIBLE);
+//                }
                 }
 
-                float scaleX = (fromWidth == 0) ? 1 : (fromWidth + deltaWidth * sign * (-position)) / fromWidth;
-                float scaleY = (fromHeight == 0) ? 1 : (fromHeight + deltaHeight * sign * (-position)) / fromHeight;
 
-                intermediateView.setScaleX(scaleX);
-                intermediateView.setScaleY(scaleY);
-                intermediateView.setVisibility(View.VISIBLE);
-                ImageView imageView = intermediateViews.get(Pair.create(idPair.second, idPair.first));
-                if (imageView != null) {
-                    imageView.setVisibility(View.INVISIBLE);
+                if (currentPage.findViewById(fromId) != null) {
+                    if (slideToTheRight) {
+                        if ((position > -1) && (position < 0)) {
+                            fromView.setVisibility(View.INVISIBLE);
+                            intermediateView.setVisibility(View.VISIBLE);
+                        } else {
+                            fromView.setVisibility(View.VISIBLE);
+                            intermediateView.setVisibility(View.INVISIBLE);
+                        }
+                    } else {
+                        if ((position > 0) && (position < 1)) {
+                            fromView.setVisibility(View.INVISIBLE);
+                            intermediateView.setVisibility(View.VISIBLE);
+                        } else {
+                            fromView.setVisibility(View.VISIBLE);
+                            intermediateView.setVisibility(View.INVISIBLE);
+                        }
+                    }
                 }
-            }
+                if (currentPage.findViewById(toId) != null) {
+                    if (slideToTheRight) {
+                        if ((position > 0) && (position < 1)) {
+                            toView.setVisibility(View.INVISIBLE);
+                            intermediateView.setVisibility(View.VISIBLE);
+                        } else {
+                            toView.setVisibility(View.VISIBLE);
+                            intermediateView.setVisibility(View.INVISIBLE);
+                        }
+                    } else {
+                        if ((position > -1) && (position < 0)) {
+                            toView.setVisibility(View.INVISIBLE);
+                            intermediateView.setVisibility(View.VISIBLE);
+                        } else {
+                            toView.setVisibility(View.VISIBLE);
+                            intermediateView.setVisibility(View.INVISIBLE);
+                        }
+                    }
 
 
-            if (currentPage.findViewById(fromId) != null) {
-
-                if (position == 0) {
-                    fromView.setVisibility(View.VISIBLE);
-                } else {
-                    fromView.setVisibility(View.INVISIBLE);
                 }
-            }
-            if (currentPage.findViewById(toId) != null) {
+// if (currentPage.findViewById(toId) != null) {
+//                if(slideToTheRight) {
+//                    if (position >= 0 || position <= -1) {
+//                        toView.setVisibility(View.VISIBLE);
+////                        intermediateView.setVisibility(View.INVISIBLE);
+//                    } else {
+//                        toView.setVisibility(View.INVISIBLE);
+////                        intermediateView.setVisibility(View.VISIBLE);
+//                    }
+//                } else {
+//                    if (position <= 0 || position >= 1) {
+//                        toView.setVisibility(View.VISIBLE);
+////                        intermediateView.setVisibility(View.INVISIBLE);
+//                    } else {
+//                        toView.setVisibility(View.INVISIBLE);
+////                        intermediateView.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//
+//
+//
+//            }
 
-                if (position == 0) {
-                    toView.setVisibility(View.VISIBLE);
-                } else {
-                    toView.setVisibility(View.INVISIBLE);
+
+            } else {
+                View intermediateView = intermediateViews.get(idPair);
+                if (intermediateView != null && currentPage.findViewById(fromId) != null) {
+                    intermediateView.setVisibility(View.INVISIBLE);
+
                 }
-            }
-
-
-        } else {
-            ImageView intermediateView = intermediateViews.get(idPair);
-            if (intermediateView != null && currentPage.findViewById(fromId) != null) {
-                intermediateView.setVisibility(View.INVISIBLE);
-
             }
         }
-
     }
 
     private int[] getLayoutPosition() {
@@ -214,6 +263,41 @@ public class AuxiliarySePageTransformer extends AbstractSePageTransformer {
 
             }
         }
+
+    }
+
+
+    @Override
+    public void removeTransition(int fromViewId, int toViewId, boolean bothDirections) {
+        super.removeTransition(fromViewId, toViewId, bothDirections);
+
+        Pair<Integer, Integer> idPair = Pair.create(fromViewId, toViewId);
+        View view = intermediateViews.get(idPair);
+        ((RelativeLayout) relativeLayout).removeView(view);
+        intermediateViews.remove(idPair);
+        if(bothDirections) {
+            idPair = Pair.create(toViewId, fromViewId);
+            view = intermediateViews.get(idPair);
+            ((RelativeLayout) relativeLayout).removeView(view);
+            intermediateViews.remove(idPair);
+
+        }
+
+    }
+
+    @Override
+    public void removeTransition(int fromViewId, int toViewId) {
+        removeTransition(fromViewId, toViewId, true);
+        super.removeTransition(fromViewId, toViewId);
+    }
+
+    @Override
+    public void clearAllTransitions() {
+        super.clearAllTransitions();
+        for (Pair<Integer, Integer> idPair : intermediateViews.keySet()) {
+            removeTransition(idPair.first, idPair.second, true);
+        }
+
 
     }
 

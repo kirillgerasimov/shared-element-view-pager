@@ -14,7 +14,7 @@ publish {
     userOrg = ''
     groupId = 'com.github.kirillgerasimov'
     artifactId = 'shared-element-view-pager'
-    publishVersion = '0.0.3-alpha'
+    publishVersion = '0.0.4-alpha'
     desc = 'This library allows you to perform somewhat similar to Shared Element Transition between ViewPager pages. '
     website = 'https://github.com/kirillgerasimov/Shared-Element-View-Pager'
     repoName= 'maven'
